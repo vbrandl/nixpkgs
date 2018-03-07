@@ -467,6 +467,8 @@ stdenv.mkDerivation ({
     description = "Complete VHDL simulator, using the GCC technology (gcc ${version})";
     maintainers = with stdenv.lib.maintainers; [viric];
     platforms = with stdenv.lib.platforms; linux;
+    # https://hydra.nixos.org/build/70177899
+    broken = langAda;
   };
 
 })
