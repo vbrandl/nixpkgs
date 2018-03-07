@@ -184,7 +184,7 @@ in {
   backports_csv = callPackage ../development/python-modules/backports_csv {};
 
   bap = callPackage ../development/python-modules/bap {
-    bap = pkgs.ocamlPackages_4_02.bap;
+    bap = pkgs.ocamlPackages.bap;
   };
 
   bash_kernel = callPackage ../development/python-modules/bash_kernel { };
@@ -240,6 +240,8 @@ in {
   h5py-mpi = self.h5py.override {
     hdf5 = pkgs.hdf5-mpi;
   };
+
+  ha-ffmpeg = callPackage ../development/python-modules/ha-ffmpeg { };
 
   habanero = callPackage ../development/python-modules/habanero { };
 
@@ -429,6 +431,8 @@ in {
   aiohttp = callPackage ../development/python-modules/aiohttp { };
 
   aiohttp-cors = callPackage ../development/python-modules/aiohttp/cors.nix { };
+
+  aiohttp-jinja2 = callPackage ../development/python-modules/aiohttp-jinja2 { };
 
   alabaster = callPackage ../development/python-modules/alabaster {};
 
@@ -622,22 +626,9 @@ in {
     gui = false;
   };
 
+  deluge-client = callPackage ../development/python-modules/deluge-client { };
 
   arrow = callPackage ../development/python-modules/arrow { };
-
-  async = buildPythonPackage rec {
-    name = "async-0.6.1";
-    disabled = isPy3k;
-    meta.maintainers = with maintainers; [ ];
-
-    buildInputs = with self; [ pkgs.zlib ];
-    doCheck = false;
-
-    src = pkgs.fetchurl {
-      url = "mirror://pypi/a/async/${name}.tar.gz";
-      sha256 = "1lfmjm8apy9qpnpbq8g641fd01qxh9jlya5g2d6z60vf8p04rla1";
-    };
-  };
 
   asynctest = callPackage ../development/python-modules/asynctest { };
 
@@ -2832,6 +2823,8 @@ in {
     };
   };
 
+  miniupnpc = callPackage ../development/python-modules/miniupnpc {};
+
   mixpanel = buildPythonPackage rec {
     version = "4.0.2";
     name = "mixpanel-${version}";
@@ -4461,24 +4454,7 @@ in {
     };
   };
 
-  ftputil = buildPythonPackage rec {
-    version = "3.3";
-    name = "ftputil-${version}";
-
-    src = pkgs.fetchurl {
-      url = "mirror://pypi/f/ftputil/${name}.tar.gz";
-      sha256 = "1714w0v6icw2xjx5m54yv2qgkq49qwxwllq4gdb7wkz25iiapr8b";
-    };
-
-    disabled = isPy3k;
-
-    meta = {
-      description = "High-level FTP client library (virtual file system and more)";
-      homepage    = https://pypi.python.org/pypi/ftputil;
-      platforms   = platforms.linux;
-      license     = licenses.bsd2; # "Modified BSD license, says pypi"
-    };
-  };
+  ftputil = callPackage ../development/python-modules/ftputil { };
 
   fudge = buildPythonPackage rec {
     name = "fudge-1.1.0";
@@ -7092,6 +7068,8 @@ in {
       homepage = https://github.com/djblets/djblets;
     };
   };
+
+  dj-database-url = callPackage ../development/python-modules/dj-database-url { };
 
   djmail = callPackage ../development/python-modules/djmail { };
 
@@ -11612,23 +11590,7 @@ in {
     };
   };
 
-  ldappool = buildPythonPackage rec {
-    name = "ldappool-${version}";
-    version = "1.0";
-
-    src = pkgs.fetchurl {
-      url = "mirror://pypi/l/ldappool/${name}.tar.gz";
-      sha256 = "1akmzf51cjfvmd0nvvm562z1w9vq45zsx6fa72kraqgsgxhnrhqz";
-    };
-
-    # Judging from SyntaxError
-    disabled = isPy3k;
-
-    meta = with stdenv.lib; {
-      homepage = "https://github.com/mozilla-services/ldappool";
-    };
-  };
-
+  ldappool = callPackage ../development/python-modules/ldappool { };
 
   lz4 = buildPythonPackage rec {
     name = "lz4-0.8.2";
@@ -12334,24 +12296,7 @@ in {
 
   pylibmc = callPackage ../development/python-modules/pylibmc {};
 
-  pymetar = buildPythonPackage rec {
-    name = "${pname}-${version}";
-    pname = "pymetar";
-    version = "0.20";
-
-    disabled = isPy3k;
-
-    src = pkgs.fetchurl {
-      url = "mirror://pypi/p/${pname}/${name}.tar.gz";
-      sha256 = "1rxyg9465cp6nc47pqxqf092wmbvv2zhffzvaf2w74laal43pgxw";
-    };
-
-    meta = {
-      description = "A command-line tool to show the weather report by a given station ID";
-      homepage = http://www.schwarzvogel.de/software/pymetar.html;
-      license = licenses.gpl2;
-    };
-  };
+  pymetar = callPackage ../development/python-modules/pymetar { };
 
   pysftp = buildPythonPackage rec {
     name = "pysftp-${version}";
@@ -13029,27 +12974,7 @@ in {
     };
   });
 
-  pycups = buildPythonPackage rec {
-    name = "pycups-${version}";
-    version = "1.9.73";
-
-    src = pkgs.fetchurl {
-      url = "http://cyberelk.net/tim/data/pycups/pycups-${version}.tar.bz2";
-      sha256 = "c381be011889ca6f728598578c89c8ac9f7ab1e95b614474df9f2fa831ae5335";
-    };
-
-    buildInputs = [ pkgs.cups ];
-
-    # Wants to connect to CUPS
-    doCheck = false;
-
-    meta = {
-      description = "Python bindings for libcups";
-      homepage = http://cyberelk.net/tim/software/pycups/;
-      license = with licenses; [ gpl2Plus ];
-    };
-
-  };
+  pycups = callPackage ../development/python-modules/pycups { };
 
   pycurl = buildPythonPackage (rec {
     name = "pycurl-7.19.5.1";
@@ -20990,9 +20915,13 @@ EOF
 
   thinc = callPackage ../development/python-modules/thinc { };
 
+  yahooweather = callPackage ../development/python-modules/yahooweather { };
+
   spacy = callPackage ../development/python-modules/spacy { };
 
   spacy_models = callPackage ../development/python-modules/spacy/models.nix { };
+
+  sseclient = callPackage ../development/python-modules/sseclient { };
 
   textacy = callPackage ../development/python-modules/textacy { };
 
