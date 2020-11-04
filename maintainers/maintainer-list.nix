@@ -9049,6 +9049,12 @@
     githubId = 797581;
     name = "Vincent Bernardoff";
   };
+  vbrandl = {
+    email = "mail+nix@vbrandl.net";
+    github = "vbrandl";
+    githubId = 20639051;
+    name = "Valentin Brandl";
+  };
   vcanadi = {
     email = "vito.canadi@gmail.com";
     github = "vcanadi";
