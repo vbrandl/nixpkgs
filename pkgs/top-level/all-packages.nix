@@ -5654,6 +5654,8 @@ in
 
   mmake = callPackage ../tools/misc/mmake { };
 
+  modelio = callPackage ../tools/misc/modelio { };
+
   modemmanager = callPackage ../tools/networking/modem-manager {};
 
   modem-manager-gui = callPackage ../applications/networking/modem-manager-gui {};
