@@ -44,7 +44,7 @@ stdenv.mkDerivation rec {
 
   meta = with stdenv.lib; {
     homepage = https://www.modelio.org/;
-    description = "UML moddeling";
+    description = "Modelio is a modeling solution offering a wide range of functionalities based on the main standards of enterprise architecture, software development and systems engineering.";
     platforms = platforms.linux;
     maintainers = with maintainers; [ vbrandl ];
   };
